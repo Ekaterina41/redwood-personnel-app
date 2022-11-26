@@ -1,0 +1,38 @@
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider      = "prisma-client-js"
+  binaryTargets = "native"
+}
+
+model Employee {
+  id             Int       @id @default(autoincrement())
+  email          String    @unique
+  name           String
+  surname        String
+  dateOfBirth    DateTime
+  phone          String
+  project        Project?  @relation("ProjectEmployee", fields: [projectId], references: [id])
+  projectId      Int?
+  managedProject Project?  @relation("ProjectManager") // one-to-one - one manager can manage only 1 project
+  position       Position? @relation(fields: [positionId], references: [id])
+  positionId     Int?
+}
+
+model Project {
+  id          Int        @id @default(autoincrement())
+  name        String
+  description String
+  manager     Employee?  @relation("ProjectManager", fields: [managerId], references: [id])
+  managerId   Int?       @unique // one-to-one - project can have only 1 manager
+  employees   Employee[] @relation("ProjectEmployee")
+}
+
+model Position {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  employees Employee[]
+}
