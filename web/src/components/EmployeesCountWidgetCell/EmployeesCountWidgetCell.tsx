@@ -25,9 +25,9 @@ export const Success = ({
   return (
     <div>
       <Link to={routes.employees()} className="rw-link">
-        <h3>Employees</h3>
+        Employees
       </Link>
-      <h3>{employeesCount.count}</h3>
+      <p>{employeesCount.count}</p>
     </div>
   )
 }
