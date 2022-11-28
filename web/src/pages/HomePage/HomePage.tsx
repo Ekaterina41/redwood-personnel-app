@@ -1,5 +1,6 @@
-import { Link, routes } from '@redwoodjs/router'
 import { MetaTags } from '@redwoodjs/web'
+
+import EmployeesCountWidgetCell from 'src/components/EmployeesCountWidgetCell'
 
 const HomePage = () => {
   return (
@@ -7,6 +8,8 @@ const HomePage = () => {
       <MetaTags title="Home" description="Home page" />
 
       <h1>Personnel Management</h1>
+
+      <EmployeesCountWidgetCell />
     </>
   )
 }

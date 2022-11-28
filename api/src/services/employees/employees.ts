@@ -10,6 +10,10 @@ export const employees: QueryResolvers['employees'] = () => {
   return db.employee.findMany()
 }
 
+export const employeesCount = () => {
+  return { count: db.employee.count() }
+}
+
 export const employee: QueryResolvers['employee'] = ({ id }) => {
   return db.employee.findUnique({
     where: { id },
