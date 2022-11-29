@@ -1,6 +1,8 @@
 import { MetaTags } from '@redwoodjs/web'
 
 import EmployeesCountWidgetCell from 'src/components/EmployeesCountWidgetCell'
+import PositionsCountWidgetCell from 'src/components/PositionsCountWidgetCell'
+import ProjectsCountWidgetCell from 'src/components/ProjectsCountWidgetCell'
 
 const HomePage = () => {
   return (
@@ -11,8 +13,10 @@ const HomePage = () => {
         <h1>Personnel Management</h1>
       </div>
 
-      <div className="home-page-widgets">
+      <div className="widgets-container">
         <EmployeesCountWidgetCell />
+        <ProjectsCountWidgetCell />
+        <PositionsCountWidgetCell />
       </div>
     </>
   )

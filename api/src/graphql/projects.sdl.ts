@@ -8,8 +8,13 @@ export const schema = gql`
     employees: [Employee]!
   }
 
+  type ProjectsCount {
+    count: Int!
+  }
+
   type Query {
     projects: [Project!]! @requireAuth
+    projectsCount: ProjectsCount! @requireAuth
     project(id: Int!): Project @requireAuth
   }
 

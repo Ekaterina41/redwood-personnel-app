@@ -1,11 +1,11 @@
-import type { FindEmployeesCount } from 'types/graphql'
+import type { FindPositionsCount } from 'types/graphql'
 
 import { Link, routes } from '@redwoodjs/router'
 import type { CellSuccessProps, CellFailureProps } from '@redwoodjs/web'
 
 export const QUERY = gql`
-  query FindEmployeesCount {
-    employeesCount {
+  query FindPositionsCount {
+    positionsCount {
       count
     }
   }
@@ -20,12 +20,12 @@ export const Failure = ({ error }: CellFailureProps) => (
 )
 
 export const Success = ({
-  employeesCount,
-}: CellSuccessProps<FindEmployeesCount>) => {
+  positionsCount,
+}: CellSuccessProps<FindPositionsCount>) => {
   return (
     <div>
-      <Link to={routes.employees()}>Employees</Link>
-      <p>{employeesCount.count}</p>
+      <Link to={routes.positions()}>Positions</Link>
+      <p>{positionsCount.count}</p>
     </div>
   )
 }

@@ -10,6 +10,10 @@ export const projects: QueryResolvers['projects'] = () => {
   return db.project.findMany()
 }
 
+export const projectsCount = () => {
+  return { count: db.project.count() }
+}
+
 export const project: QueryResolvers['project'] = ({ id }) => {
   return db.project.findUnique({
     where: { id },

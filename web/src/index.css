@@ -3,22 +3,23 @@ body {
 }
 
 .home-page-header {
-  padding: 0 100px 0 100px;
+  padding: 10px 100px 0 100px;
 }
 
-.home-page-widgets {
+.widgets-container {
   display: flex;
   flex-wrap: wrap;
   margin: 0 200px 20px 200px;
 }
 
-.home-page-widgets div {
-  border: 1px solid black;
+.widgets-container div {
+  border: 1px solid gray;
   padding: 20px 40px 20px 40px;
   margin: 20px;
+  width: 180px;
 }
 
-.home-page-widgets div a {
+.widgets-container div a {
   color: black;
   text-decoration: none;
   font-size: 2rem;
@@ -26,12 +27,12 @@ body {
   text-transform: uppercase;
 }
 
-.home-page-widgets div a:hover {
+.widgets-container div a:hover {
   color: black;
   text-decoration: underline;
 }
 
-.home-page-widgets div p {
+.widgets-container div p {
   font-size: 3rem;
   font-weight: bold;
   margin: 10px 0 0 0;

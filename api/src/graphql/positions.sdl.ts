@@ -5,8 +5,13 @@ export const schema = gql`
     employees: [Employee]!
   }
 
+  type PositionsCount {
+    count: Int!
+  }
+
   type Query {
     positions: [Position!]! @requireAuth
+    positionsCount: PositionsCount! @requireAuth
     position(id: Int!): Position @requireAuth
   }
 

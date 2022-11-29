@@ -10,6 +10,10 @@ export const positions: QueryResolvers['positions'] = () => {
   return db.position.findMany()
 }
 
+export const positionsCount = () => {
+  return { count: db.position.count() }
+}
+
 export const position: QueryResolvers['position'] = ({ id }) => {
   return db.position.findUnique({
     where: { id },
