@@ -10,8 +10,11 @@ import {
   NumberField,
   Submit,
   DateField,
+  SelectField,
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
+
+import ProjectsSelectListCell from 'src/components/ProjectsSelectListCell'
 
 const formatDatetime = (value) => {
   if (value) {
@@ -142,12 +145,15 @@ const EmployeeForm = (props: EmployeeFormProps) => {
           Project id
         </Label>
 
-        <NumberField
+        <SelectField
           name="projectId"
-          defaultValue={props.employee?.projectId}
           className="rw-input"
-          errorClassName="rw-input rw-input-error"
-        />
+          errorClassName="rw-label rw-label-error"
+          defaultValue={props.employee?.projectId}
+          validation={{ valueAsNumber: true }}
+        >
+          <ProjectsSelectListCell />
+        </SelectField>
 
         <FieldError name="projectId" className="rw-field-error" />
 

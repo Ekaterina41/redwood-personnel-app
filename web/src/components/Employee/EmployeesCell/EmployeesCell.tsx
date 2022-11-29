@@ -14,8 +14,14 @@ export const QUERY = gql`
       surname
       dateOfBirth
       phone
-      projectId
-      positionId
+      project {
+        id
+        name
+      }
+      position {
+        id
+        name
+      }
     }
   }
 `

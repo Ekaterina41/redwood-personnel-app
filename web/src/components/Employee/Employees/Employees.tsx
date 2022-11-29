@@ -1,11 +1,14 @@
+import type {
+  DeleteEmployeeMutationVariables,
+  FindEmployees,
+} from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Employee/EmployeesCell'
 import { timeTag, truncate } from 'src/lib/formatters'
-
-import type { DeleteEmployeeMutationVariables, FindEmployees } from 'types/graphql'
 
 const DELETE_EMPLOYEE_MUTATION = gql`
   mutation DeleteEmployeeMutation($id: Int!) {
@@ -42,13 +45,12 @@ const EmployeesList = ({ employees }: FindEmployees) => {
         <thead>
           <tr>
             <th>Id</th>
-            <th>Email</th>
             <th>Name</th>
-            <th>Surname</th>
+            <th>Email</th>
             <th>Date of birth</th>
             <th>Phone</th>
-            <th>Project id</th>
-            <th>Position id</th>
+            <th>Project</th>
+            <th>Position</th>
             <th>&nbsp;</th>
           </tr>
         </thead>
@@ -56,13 +58,30 @@ const EmployeesList = ({ employees }: FindEmployees) => {
           {employees.map((employee) => (
             <tr key={employee.id}>
               <td>{truncate(employee.id)}</td>
+              <td>
+                {truncate(employee.name) + ' ' + truncate(employee.surname)}
+              </td>
               <td>{truncate(employee.email)}</td>
-              <td>{truncate(employee.name)}</td>
-              <td>{truncate(employee.surname)}</td>
               <td>{timeTag(employee.dateOfBirth)}</td>
               <td>{truncate(employee.phone)}</td>
-              <td>{truncate(employee.projectId)}</td>
-              <td>{truncate(employee.positionId)}</td>
+              <td>
+                {employee.project != null ? (
+                  <Link to={routes.project({ id: employee.project.id })}>
+                    {truncate(employee.project.name)}
+                  </Link>
+                ) : (
+                  ''
+                )}
+              </td>
+              <td>
+                {employee.position != null ? (
+                  <Link to={routes.position({ id: employee.position.id })}>
+                    {truncate(employee.position.name)}
+                  </Link>
+                ) : (
+                  ''
+                )}
+              </td>
               <td>
                 <nav className="rw-table-actions">
                   <Link
