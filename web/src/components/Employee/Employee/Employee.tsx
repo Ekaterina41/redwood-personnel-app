@@ -1,11 +1,13 @@
+import type {
+  DeleteEmployeeMutationVariables,
+  FindEmployeeById,
+} from 'types/graphql'
 
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import { timeTag,  } from 'src/lib/formatters'
-
-import type { DeleteEmployeeMutationVariables, FindEmployeeById } from 'types/graphql'
+import { timeTag } from 'src/lib/formatters'
 
 const DELETE_EMPLOYEE_MUTATION = gql`
   mutation DeleteEmployeeMutation($id: Int!) {
@@ -49,27 +51,54 @@ const Employee = ({ employee }: Props) => {
             <tr>
               <th>Id</th>
               <td>{employee.id}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Email</th>
               <td>{employee.email}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Name</th>
               <td>{employee.name}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Surname</th>
               <td>{employee.surname}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Date of birth</th>
               <td>{timeTag(employee.dateOfBirth)}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Phone</th>
               <td>{employee.phone}</td>
-            </tr><tr>
+            </tr>
+            {/* <tr>
               <th>Project id</th>
-              <td>{employee.projectId}</td>
-            </tr><tr>
-              <th>Position id</th>
-              <td>{employee.positionId}</td>
+              <td>{employee.project.id}</td>
+            </tr> */}
+            <tr>
+              <th>Project</th>
+              <td>
+                {employee.project != null ? (
+                  <Link to={routes.project({ id: employee.project.id })}>
+                    {employee.project.name}
+                  </Link>
+                ) : (
+                  <span className="red-text">No project assigned</span>
+                )}
+              </td>
+            </tr>
+            <tr>
+              <th>Position</th>
+              <td>
+                {employee.position != null ? (
+                  <Link to={routes.position({ id: employee.position.id })}>
+                    {employee.position.name}
+                  </Link>
+                ) : (
+                  <span className="red-text">No position assigned</span>
+                )}
+              </td>
             </tr>
           </tbody>
         </table>
