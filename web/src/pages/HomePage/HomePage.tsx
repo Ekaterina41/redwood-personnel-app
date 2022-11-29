@@ -9,10 +9,6 @@ const HomePage = () => {
     <>
       <MetaTags title="Home" description="Home page" />
 
-      <div className="home-page-header">
-        <h1>Personnel Management</h1>
-      </div>
-
       <div className="widgets-container">
         <EmployeesCountWidgetCell />
         <ProjectsCountWidgetCell />
