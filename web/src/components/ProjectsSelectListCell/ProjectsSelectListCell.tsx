@@ -24,6 +24,7 @@ export const Success = ({
 }: CellSuccessProps<FindProjectsSelectList>) => {
   return (
     <>
+      <option value={null}>No project assigned</option>
       {projectsSelectList.map((project) => (
         <option key={project.id} value={project.id}>
           {project.name}
