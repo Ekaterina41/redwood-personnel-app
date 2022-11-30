@@ -1,11 +1,14 @@
-
 import { Link, routes, navigate } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
-import {  } from 'src/lib/formatters'
+import { truncate } from 'src/lib/formatters'
 
-import type { DeletePositionMutationVariables, FindPositionById } from 'types/graphql'
+// eslint-disable-next-line import/order
+import type {
+  DeletePositionMutationVariables,
+  FindPositionById,
+} from 'types/graphql'
 
 const DELETE_POSITION_MUTATION = gql`
   mutation DeletePositionMutation($id: Int!) {
@@ -49,7 +52,8 @@ const Position = ({ position }: Props) => {
             <tr>
               <th>Id</th>
               <td>{position.id}</td>
-            </tr><tr>
+            </tr>
+            <tr>
               <th>Name</th>
               <td>{position.name}</td>
             </tr>
@@ -71,6 +75,39 @@ const Position = ({ position }: Props) => {
           Delete
         </button>
       </nav>
+      <div className="rw-segment">
+        <header className="rw-segment-header">
+          <h2 className="rw-heading rw-heading-secondary">
+            Employees with {position.name} function
+          </h2>
+        </header>
+        <table className="rw-table">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Project</th>
+            </tr>
+          </thead>
+          <tbody>
+            {position.employees?.map((employee) => (
+              <tr key={employee.id}>
+                <td>
+                  <Link to={routes.employee({ id: employee.id })}>
+                    {truncate(employee.name) + ' ' + truncate(employee.surname)}
+                  </Link>
+                </td>
+                <td>
+                  {employee.project != null ? (
+                    employee.project.name
+                  ) : (
+                    <span className="red-text">No project assigned</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
     </>
   )
 }

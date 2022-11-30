@@ -9,6 +9,15 @@ export const QUERY = gql`
     position: position(id: $id) {
       id
       name
+      employees {
+        id
+        name
+        surname
+        project {
+          id
+          name
+        }
+      }
     }
   }
 `
