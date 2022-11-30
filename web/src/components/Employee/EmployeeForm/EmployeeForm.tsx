@@ -14,6 +14,7 @@ import {
 } from '@redwoodjs/forms'
 import type { RWGqlError } from '@redwoodjs/forms'
 
+import PositionsSelectListCell from 'src/components/PositionsSelectListCell'
 import ProjectsSelectListCell from 'src/components/ProjectsSelectListCell'
 
 const formatDatetime = (value) => {
@@ -145,6 +146,7 @@ const EmployeeForm = (props: EmployeeFormProps) => {
           Project id
         </Label>
 
+        {/* TODO fix error: <div> cannot appear as a child of <select>. */}
         <SelectField
           name="projectId"
           className="rw-input"
@@ -165,12 +167,16 @@ const EmployeeForm = (props: EmployeeFormProps) => {
           Position id
         </Label>
 
-        <NumberField
+        {/* TODO fix error: <div> cannot appear as a child of <select>. */}
+        <SelectField
           name="positionId"
           defaultValue={props.employee?.positionId}
           className="rw-input"
           errorClassName="rw-input rw-input-error"
-        />
+          validation={{ valueAsNumber: true }}
+        >
+          <PositionsSelectListCell />
+        </SelectField>
 
         <FieldError name="positionId" className="rw-field-error" />
 
