@@ -10,7 +10,20 @@ export const QUERY = gql`
       id
       name
       description
-      managerId
+      manager {
+        id
+        name
+        surname
+      }
+      employees {
+        id
+        name
+        surname
+        position {
+          id
+          name
+        }
+      }
     }
   }
 `

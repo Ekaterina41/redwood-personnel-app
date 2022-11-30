@@ -11,7 +11,11 @@ export const QUERY = gql`
       id
       name
       description
-      managerId
+      manager {
+        id
+        name
+        surname
+      }
     }
   }
 `
@@ -22,10 +26,7 @@ export const Empty = () => {
   return (
     <div className="rw-text-center">
       {'No projects yet. '}
-      <Link
-        to={routes.newProject()}
-        className="rw-link"
-      >
+      <Link to={routes.newProject()} className="rw-link">
         {'Create one?'}
       </Link>
     </div>

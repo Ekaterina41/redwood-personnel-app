@@ -1,11 +1,14 @@
+import type {
+  DeleteProjectMutationVariables,
+  FindProjects,
+} from 'types/graphql'
+
 import { Link, routes } from '@redwoodjs/router'
 import { useMutation } from '@redwoodjs/web'
 import { toast } from '@redwoodjs/web/toast'
 
 import { QUERY } from 'src/components/Project/ProjectsCell'
 import { truncate } from 'src/lib/formatters'
-
-import type { DeleteProjectMutationVariables, FindProjects } from 'types/graphql'
 
 const DELETE_PROJECT_MUTATION = gql`
   mutation DeleteProjectMutation($id: Int!) {
@@ -54,7 +57,15 @@ const ProjectsList = ({ projects }: FindProjects) => {
               <td>{truncate(project.id)}</td>
               <td>{truncate(project.name)}</td>
               <td>{truncate(project.description)}</td>
-              <td>{truncate(project.managerId)}</td>
+              <td>
+                {project.manager != null ? (
+                  <Link to={routes.employee({ id: project.manager.id })}>
+                    {truncate(project.manager.name) +
+                      ' ' +
+                      truncate(project.manager.surname)}
+                  </Link>
+                ) : null}
+              </td>
               <td>
                 <nav className="rw-table-actions">
                   <Link

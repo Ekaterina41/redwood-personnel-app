@@ -1,3 +1,5 @@
+import type { EditProjectById, UpdateProjectInput } from 'types/graphql'
+
 import {
   Form,
   FormError,
@@ -6,13 +8,11 @@ import {
   TextField,
   NumberField,
   Submit,
+  SelectField,
 } from '@redwoodjs/forms'
-
-import type { EditProjectById, UpdateProjectInput } from 'types/graphql'
 import type { RWGqlError } from '@redwoodjs/forms'
 
-
-
+import EmployeesSelectListCell from 'src/components/EmployeesSelectListCell'
 
 type FormProject = NonNullable<EditProjectById['project']>
 
@@ -25,16 +25,6 @@ interface ProjectFormProps {
 
 const ProjectForm = (props: ProjectFormProps) => {
   const onSubmit = (data: FormProject) => {
-  
-    
-    
-  
-    
-    
-  
-    
-    
-  
     props.onSave(data, props?.project?.id)
   }
 
@@ -47,7 +37,7 @@ const ProjectForm = (props: ProjectFormProps) => {
           titleClassName="rw-form-error-title"
           listClassName="rw-form-error-list"
         />
-      
+
         <Label
           name="name"
           className="rw-label"
@@ -55,15 +45,14 @@ const ProjectForm = (props: ProjectFormProps) => {
         >
           Name
         </Label>
-        
-          <TextField
-            name="name"
-            defaultValue={props.project?.name}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <TextField
+          name="name"
+          defaultValue={props.project?.name}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="name" className="rw-field-error" />
 
@@ -74,15 +63,14 @@ const ProjectForm = (props: ProjectFormProps) => {
         >
           Description
         </Label>
-        
-          <TextField
-            name="description"
-            defaultValue={props.project?.description}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-            validation={{ required: true }}
-          />
-        
+
+        <TextField
+          name="description"
+          defaultValue={props.project?.description}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ required: true }}
+        />
 
         <FieldError name="description" className="rw-field-error" />
 
@@ -93,22 +81,21 @@ const ProjectForm = (props: ProjectFormProps) => {
         >
           Manager id
         </Label>
-        
-          <NumberField
-            name="managerId"
-            defaultValue={props.project?.managerId}
-            className="rw-input"
-            errorClassName="rw-input rw-input-error"
-          />
-        
+
+        <SelectField
+          name="managerId"
+          defaultValue={props.project?.managerId}
+          className="rw-input"
+          errorClassName="rw-input rw-input-error"
+          validation={{ valueAsNumber: true }}
+        >
+          <EmployeesSelectListCell />
+        </SelectField>
 
         <FieldError name="managerId" className="rw-field-error" />
 
         <div className="rw-button-group">
-          <Submit
-            disabled={props.loading}
-            className="rw-button rw-button-blue"
-          >
+          <Submit disabled={props.loading} className="rw-button rw-button-blue">
             Save
           </Submit>
         </div>
